@@ -57,6 +57,8 @@ def getSum(a : int, b : int):
     c = a + b
     return c
 
+# print(getSum(3, 4))
+# print(getSum("fgh", 8))
 
 ar = [1, 2, 3, 4, 5]
 
@@ -89,13 +91,5 @@ def find_user(name: str) -> dict:
         
     return None
 
-u = find_user("Bob")
-print(u)
-
-
-
-
-
-
-# print(getSum(3, 4))
-# print(getSum("fgh", 8))
+# u = find_user("Bob")
+# print(u)
