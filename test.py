@@ -1,5 +1,5 @@
 from typing import Callable
-
+import time;
 
 
 students = [
@@ -7,6 +7,11 @@ students = [
 ]
 
 
+start_time = time.time()
+print("something")
+end_time = time.time()
+
+print("execution time: ", end_time - start_time)
 
 def test_method(name: str):
     print(f"testing method with name: {name}")

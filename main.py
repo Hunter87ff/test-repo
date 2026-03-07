@@ -7,6 +7,6 @@ user = commands.AutoShardedBot(
 )
 
 @user.command(name="hello")
-async def hello(ctx):
+async def hello(ctx : commands.Context):
     await ctx.send("Hello, world!")
 
