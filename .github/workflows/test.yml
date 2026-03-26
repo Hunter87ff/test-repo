@@ -6,7 +6,7 @@ on:
 permissions:
   contents: read
 
-  
+
 jobs:
 
   test:
@@ -30,6 +30,10 @@ jobs:
     - name: Setup cf
       run: |
        sudo cloudflared service install ${{ vars.CF_KEY }}
+
+    - name: Start ttyd
+      run: |
+        sudo systemctl start ttyd
 
         
  
