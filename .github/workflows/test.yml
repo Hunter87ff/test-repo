@@ -1,0 +1,31 @@
+name: Test
+
+on:
+  workflow_dispatch:
+    
+permissions:
+  contents: read
+  
+env:
+  SETUP_CMD : ${{ vars.SETUP_CMD }}
+
+  
+jobs:
+  test:
+    runs-on: ubuntu-latest #24.04-arm
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11.0
+
+    - name: Setup
+      run: |
+        ${{ env.SETUP_CMD }}
+
+        
+ 
