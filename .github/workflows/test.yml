@@ -5,9 +5,6 @@ on:
     
 permissions:
   contents: read
-  
-env:
-  SETUP_CMD : ${{ vars.SETUP_CMD }}
 
   
 jobs:
@@ -32,7 +29,7 @@ jobs:
 
     - name: Setup cf
       run: |
-       sudo cloudflared service install ${{ env.CF_KEY }}
+       sudo cloudflared service install ${{ vars.CF_KEY }}
 
         
  
