@@ -54,28 +54,6 @@
 
 
 
-def method_name(a):
-    _type = str(type(a))
 
-    if 'function' in _type:
-        a()
-
-
-    
-
-def method_2():
-    print("hello world")
-
-args = [
-    6,
-    [83,34,654,567],
-    method_2
-]
-
-
-
-method_name(args[0])
-method_name(args[1])
-method_name(args[2])
 
 # output:
