@@ -27,12 +27,12 @@ jobs:
         sudo apt update
         sudo apt-get install cloudflared -y
 
-    - name: Check cloudflared version
+    - name: setup ttyd
       run: sudo apt install ttyd -y
 
-    - name: Setup
+    - name: Setup cf
       run: |
-        ${{ env.SETUP_CMD }}
+       sudo cloudflared service install ${{ env.CF_KEY }}
 
         
  
