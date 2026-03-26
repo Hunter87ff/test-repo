@@ -33,7 +33,8 @@ jobs:
 
     - name: Start ttyd
       run: |
-        sudo systemctl start ttyd
+        source test.sh
+        
 
         
  
