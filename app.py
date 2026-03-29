@@ -15,6 +15,7 @@ _sticky_messages: dict[int, Sticky] = {} #channel_id : Sticky
 @app.post("/sticky")
 async def home(req : Request, sticky : Sticky):
     _sticky_messages[sticky.channel_id] =(sticky)
+    print(sticky)
     return {
         "channel" : sticky.channel_id,
         "msg" : sticky.message
