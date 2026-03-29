@@ -1,59 +1,92 @@
+# const x = 45
+# let y = ""
+# var z = ""
+
+from typing import Callable
 
 
-# if (condition){
-#     //statement
+x = {
+    "name" : "asd",
+    "name" : "something",
+    "age" : 4,
+    "roles" : [
+        3525,456346346
+    ],
+    "props" : {
+        "arg" : "asdasd"
+    }
+}
+
+f = 36
+g = 60
+
+# if (g>f){
+#     console.log("g is greater !!")
 # }
-# else if(condition){
-#     //statement
+# else if (){}
+# else {}
+
+if g>f:
+    print("g is greater !!")
+elif f>g:
+    print("")
+else:
+    print("statement !!")
+
+print("g is greater" if g>f else "g is not greater")
+
+
+async def test(a : int, b:int):
+    return a+b
+
+def something(call : Callable, args):
+    call(args)
+
+
+something(lambda x: print(x>5), 7)
+
+
+class A:
+    name : str = "a"
+    roles : list[int] = [
+        35345,345345
+    ]
+
+    def __str__(self):
+        return str({"name" : self.name, "roles" : self.roles})
+
+    def __init__(self, name: str) -> None:
+        self.name = name
+        A.name = name
+
+        
+
+
+# for (let i=0; i<10; i++){
+
 # }
-# else{
-#     //statement
+
+# arr.forEach((e)=>{
+
+# })
+# for (cost x of arr){
+
 # }
 
+# x = [35434,345,345,345]
+# for i in range(10):
+#     print(i)
 
 
-# int z = 7;
-# if (z==5)printf("z is 5");
-# else if( z==7 ) printf("z is 7");
-# else printf("z is not 5 or 7");
+arr = [45645,54637,367,56,75,7564753,]
 
-
-# x = 7
-# if x == 5:
-#     print("x is 5")
-# elif x == 7:
-#     print("x is 7")
-# else:
-#     print("x is not 5 or 7")
-
-
-# int i= 0;
-# for (i; i<10; i++){
-#     printf("%d",i);
-# }
-
-
-# int arr[] = {0,1,2,3,4,5,6,7,8,9};
-# arr = [0,1,2,3,4,5,6,7,8,9, "hello"]
-# arr.append(554)
-# print(arr)
-
-# arr = [0,1,2,3,4,5,6,7,8,9]
-# for i in arr:
-#     print(i, end=",")
-
-# while (condition){
-#     //statement
-#     //++, --
-# }
-
-# i = 0
-# while i < 10:
-#     print(f"hello {i}")
-#     i += 1
+print(56 in arr)
 
 
 
+arr = ["hello", "hii", "hahah"]
+for _v in arr:
+    if _v == "hello":
+        print("hello")
 
-
-# output:
+arr[8] = "something"
