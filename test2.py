@@ -1,13 +1,52 @@
-# import requests
+import os
+from dotenv import load_dotenv
+from pymongo import MongoClient
+load_dotenv()
 
-# _response = requests.post(
-#     "http://localhost:8000/sticky",
-#     json={
-#         "channel_id" : 1480240549264101615,
-#         "message" : "hello there !!"
+DB_URI = os.getenv("DB_URI") 
+
+
+client = MongoClient(
+    DB_URI
+)
+
+db = client["test_db"]
+users = db["users"]
+# _new_user = users.insert_one(
+#     document={
+#     "name" : "Unknown",
+#     "email" : "unknown@test.in"
 #     }
 # )
 
+# _unknown = users.find_one({"name" : "Unknown"})
+# print(_unknown)
 
-# print(_response.json())
-# print(_response.text)
+# _update_all = users.update_many({}, {
+    #     "$set" :{
+    #         "age" : 1,
+    #     }
+    # })
+
+#print(_update_all.modified_count)
+
+# _all_users = users.find({"name" : "Unknown"}).to_list(length=None)
+# print(_all_users)
+
+
+# users.update_one({"name" : "John Doe"}, {"$set": {"age": 25}})
+# _john: dict[str, str] = users.find_one({"name" : "John Doe"}) #type: ignore
+
+# print(_john)
+
+
+# _rest = users.find(
+#     {
+#         "age" : {
+#             "$lt" : 25
+#         }
+#     }
+# ).to_list(length=None)
+
+
+# print(_rest)
