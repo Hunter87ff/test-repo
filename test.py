@@ -1,102 +1,33 @@
-from typing import Callable
-import time;
 
-
-students = [
-    9,2,1,6, 8
-]
-
-
-start_time = time.time()
-print("something")
-end_time = time.time()
-
-print("execution time: ", end_time - start_time)
-
-def test_method(name: str):
-    print(f"testing method with name: {name}")
-
-
-test_method("asdasd")
-
-
-actions = {
-    "1" : {
-        "name" : "join class",
-        "perm" : 1
-    },
-    "2" : {
-        "name" : "kick classmates",
-        "perm" : 5
-    },
-    "3" : {
-        "name" : "sleep during classes",
-        "perm" : 0
-    }
-}
-
-
-def action(func: Callable):
-
-    def validate(id:str, perm:int):
-        _action = actions.get(id)
-        if _action is None:
-            print("invalid action")
-            return
-        
-        if _action.get("perm") > perm: # type: ignore
-            print("you dont have permission to do this action")
-            return
-        
-        return func(id, perm)
+class User:
+    name: str = "hello"
     
-    return validate
-
-        
-        
-@action
-def kick(id:str, perm:int):
-    print("kicking classmates")
-
-
-@action
-def join(id:str, perm:int):
-    print("joining class")
-
-
-@action
-def sleep(id:str, perm:int):
-    print("sleeping during classes")
-
-
-print(1/0)
-
-kick("2", 1)
-join("1", 1)
-sleep("3", 0)
-
-
-
-def method_name(a):
-    _type = str(type(a))
-
-    if 'function' in _type:
-        a()
-
-
+    def __init__(
+            self, 
+            name: str, 
+            email: str, 
+            password: str
+        ):
+        self.name = name
+        self.email = email
+        self.password = password
     
+    def hash(self):
+        return self.password[::-1]
+    
+    @staticmethod 
+    def do_something():
+        print("Doing something")
+        User.name = "something else"
 
-def method_2():
-    print("hello world")
+    @classmethod
+    def hello(cls):
+        print("Hello from class method")
+        cls.name = "hello"
 
-args = [
-    6,
-    [83,34,654,567],
-    method_2
-]
+u0 = User(
+    name="John Doe",
+    email="example@test.in",
+    password="password123"
+)
 
-
-
-method_name(args[0])
-method_name(args[1])
-method_name(args[2])

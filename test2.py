@@ -12,7 +12,7 @@ client = MongoClient(
 
 db = client["test_db"]
 users = db["users"]
-# _new_user = users.insert_one(
+# _new_user = await users.insert_one(
 #     document={
 #     "name" : "Unknown",
 #     "email" : "unknown@test.in"
