@@ -17,7 +17,7 @@ class User(BaseModel):
     name : str
     email : str
 
-__users: dict[str, User] = {} #channel_id : Sticky
+__users: dict[str, User] = {}
 
 @app.post("/users")
 async def create_user(req : Request, user : User):

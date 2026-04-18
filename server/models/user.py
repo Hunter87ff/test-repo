@@ -1,11 +1,6 @@
 # import typing
 from server.db import db
 
-# class UserPayload(typing.TypedDict):
-#     name: str
-#     email: str
-#     password: str
-
 
 
 class User:
@@ -17,7 +12,7 @@ class User:
         self.password = payload.get("password")
 
     async def save(self):
-        _doc = {
+        _data = {
             "name": self.name,
             "email": self.email,
             "password": self.password
@@ -25,7 +20,7 @@ class User:
         
         await self._collection.update_one(
             {"email": self.email},
-            {"$set": _doc},
+            {"$set": _data},
             upsert=True
         )
 
