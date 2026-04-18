@@ -1,5 +1,5 @@
 # import typing
-from db import db
+from server.db import db
 
 # class UserPayload(typing.TypedDict):
 #     name: str

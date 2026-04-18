@@ -1,4 +1,7 @@
-import config
+"""this is db module !! """
+
+
+import server.config as config
 from pymongo.asynchronous.mongo_client import AsyncMongoClient
 
 
