@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Finigenie BPSP — let corporate buyers pay suppliers by card even when suppliers only accept bank transfers." />
+  <title>BPSP Supplier Payments — Finigenie</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --navy:#163b63;
+      --navy-2:#0d2946;
+      --ink:#10263d;
+      --muted:#60748b;
+      --teal:#0da0bd;
+      --teal-dark:#087e99;
+      --cyan:#dff8fb;
+      --surface:#f6fafb;
+      --line:#d9e6ec;
+      --white:#fff;
+      --amber:#f3a51a;
+      --shadow:0 22px 60px rgba(16,38,61,.10);
+      --radius:24px;
+      --max:1180px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;color:var(--ink);font-family:"DM Sans",system-ui,sans-serif;background:#fff;line-height:1.55}
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(calc(100% - 40px),var(--max));margin:auto}
+    .eyebrow{display:inline-flex;align-items:center;gap:9px;font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--teal-dark)}
+    .eyebrow:before{content:"";width:8px;height:8px;border-radius:99px;background:var(--teal);box-shadow:0 0 0 5px rgba(13,160,189,.12)}
+    h1,h2,h3{font-family:Manrope,system-ui,sans-serif;letter-spacing:-.04em;margin:0}
+    h1{font-size:clamp(42px,6vw,74px);line-height:1.02;max-width:780px}
+    h2{font-size:clamp(32px,4vw,52px);line-height:1.05}
+    h3{font-size:19px;line-height:1.2}
+    p{margin:0;color:var(--muted)}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:14px 19px;border-radius:13px;font-weight:700;font-size:14px;transition:.2s ease;border:1px solid transparent}
+    .btn-primary{background:var(--teal);color:#fff;box-shadow:0 10px 24px rgba(13,160,189,.24)}
+    .btn-primary:hover{transform:translateY(-2px);background:var(--teal-dark)}
+    .btn-ghost{background:#fff;border-color:#cfe0e7;color:var(--ink)}
+    .btn-ghost:hover{transform:translateY(-2px);border-color:#a8c6d2}
+
+    /* Hero */
+    .hero{position:relative;overflow:hidden;background:radial-gradient(circle at 80% 10%,rgba(13,160,189,.20),transparent 28%),linear-gradient(135deg,var(--navy-2),var(--navy));color:#fff;padding:30px 0 86px}
+    .hero:after{content:"";position:absolute;inset:auto -10% -160px auto;width:520px;height:360px;border-radius:50%;background:rgba(13,160,189,.10);filter:blur(8px)}
+    .nav{display:flex;align-items:center;justify-content:space-between;position:relative;z-index:2;margin-bottom:82px}
+    .brand{font-family:Manrope;font-size:18px;font-weight:800;letter-spacing:.02em}.brand span{color:#17b7d0}
+    .nav-pill{font-size:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.07);padding:8px 12px;border-radius:99px;color:#dbeaf4}
+    .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.04fr .96fr;gap:58px;align-items:center}
+    .hero-copy .eyebrow{color:#7ee1ef}.hero-copy h1{margin-top:19px}.hero-copy h1 em{font-style:normal;color:#32c3d9}
+    .hero-copy .lede{font-size:18px;max-width:620px;margin-top:23px;color:#c9d9e6}
+    .hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px}
+    .hero .btn-ghost{background:rgba(255,255,255,.07);color:#fff;border-color:rgba(255,255,255,.18)}
+    .trust-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:27px}.trust{font-size:12px;color:#dbeaf4;padding:8px 11px;border:1px solid rgba(255,255,255,.14);border-radius:99px;background:rgba(255,255,255,.045)}
+
+    .flow-card{background:rgba(255,255,255,.97);border:1px solid rgba(255,255,255,.35);border-radius:28px;padding:22px;color:var(--ink);box-shadow:0 30px 80px rgba(0,0,0,.24);transform:rotate(1deg)}
+    .flow-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}.flow-head small{color:var(--muted)}
+    .live{display:flex;align-items:center;gap:7px;font-size:11px;font-weight:700;color:#128d67}.live i{width:7px;height:7px;background:#24bf83;border-radius:99px}
+    .flow-line{display:grid;grid-template-columns:1fr 24px 1fr 24px 1fr 24px 1fr;align-items:center;gap:7px}
+    .node{min-height:125px;border:1px solid var(--line);border-radius:18px;padding:15px;background:#fff;display:flex;flex-direction:column;justify-content:space-between}.node.highlight{background:linear-gradient(180deg,#ecfbfd,#fff);border-color:#8ed8e4}.node .icon{width:34px;height:34px;border-radius:11px;background:var(--cyan);display:grid;place-items:center;color:var(--teal-dark);font-weight:800}.node strong{font-size:14px}.node small{font-size:11px;color:var(--muted)}.arrow{color:#22a9c0;text-align:center;font-size:22px;font-weight:700}
+    .flow-foot{display:flex;gap:8px;margin-top:14px}.mini-stat{flex:1;border-radius:14px;background:#f5f9fa;padding:12px}.mini-stat b{display:block;font:800 18px Manrope}.mini-stat span{font-size:10px;color:var(--muted)}
+
+    /* sections */
+    section{padding:104px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:30px;margin-bottom:46px}.section-head p{max-width:520px}.soft{background:var(--surface)}
+    .challenge-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.problem{padding:25px;border:1px solid var(--line);border-radius:20px;background:#fff;min-height:205px;position:relative;overflow:hidden}.problem:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#e55c63}.problem .num{font:800 12px Manrope;color:#b6c3cc}.problem h3{margin:32px 0 10px}.problem p{font-size:14px}
+
+    .solution{background:linear-gradient(180deg,#f5fbfc 0,#fff 100%)}
+    .step-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}.step-grid:before{content:"";position:absolute;top:30px;left:10%;right:10%;height:1px;background:#9dd9e2}.step{position:relative;text-align:center;padding:0 14px}.step .bubble{position:relative;z-index:1;margin:0 auto 20px;width:60px;height:60px;border-radius:50%;display:grid;place-items:center;background:var(--teal);color:#fff;font:800 17px Manrope;box-shadow:0 0 0 9px #e9f9fb}.step h3{font-size:17px;margin-bottom:7px}.step p{font-size:13px;max-width:180px;margin:auto}
+    .audience-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:55px}.audience{background:#fff;border:1px solid var(--line);border-radius:22px;padding:25px}.audience .tag{font-size:11px;color:var(--teal-dark);font-weight:800;text-transform:uppercase;letter-spacing:.08em}.audience h3{margin:9px 0}.audience ul{margin:15px 0 0;padding-left:18px;color:var(--muted);font-size:14px}.audience li+li{margin-top:7px}
+
+    .visual-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}.visual-copy h2{margin:14px 0 17px}.visual-copy p{font-size:16px;max-width:510px}.feature-list{display:grid;gap:14px;margin-top:27px}.feature{display:flex;gap:13px;align-items:flex-start}.check{flex:0 0 25px;width:25px;height:25px;border-radius:50%;background:#e7f8fa;color:var(--teal-dark);display:grid;place-items:center;font-size:13px;font-weight:800}.feature b{display:block;font-size:14px}.feature span{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+    .media-card{border-radius:26px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow);padding:12px;overflow:hidden}.media-card img{display:block;width:100%;border-radius:17px}.caption{padding:12px 7px 3px;font-size:11px;color:var(--muted)}
+
+    .workflow{background:var(--navy-2);color:#fff}.workflow .eyebrow{color:#76dce9}.workflow .section-head p{color:#b9cddd}.workflow-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:42px;align-items:center}.workflow-steps{display:grid;gap:11px}.w-step{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;padding:14px;border:1px solid rgba(255,255,255,.10);background:rgba(255,255,255,.045);border-radius:16px}.w-step.active{background:rgba(13,160,189,.13);border-color:rgba(13,160,189,.35)}.w-num{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:#19aac4;font:800 13px Manrope}.w-step h3{font-size:15px}.w-step p{font-size:12px;color:#aebfd0;margin-top:2px}.workflow .media-card{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.10);box-shadow:none}.workflow .caption{color:#aebfd0}
+
+    .audit{background:#fff}.audit-card{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:center}.audit-copy h2{margin:14px 0}.audit-copy p{max-width:510px}.audit-points{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:27px}.audit-point{border:1px solid var(--line);border-radius:15px;padding:15px}.audit-point b{display:block;font-size:14px}.audit-point span{font-size:12px;color:var(--muted)}
+
+    .capabilities{background:var(--surface)}.cap-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.cap-card{background:#fff;border:1px solid var(--line);border-radius:24px;overflow:hidden}.cap-card .cap-top{padding:20px 23px;color:#fff;background:var(--teal)}.cap-card.optional .cap-top{background:var(--amber)}.cap-top h3{font-size:17px}.cap-top p{color:rgba(255,255,255,.84);font-size:12px;margin-top:3px}.cap-list{padding:20px 23px;display:grid;grid-template-columns:1fr 1fr;gap:10px 22px}.cap-item{font-size:13px;color:#51667b;display:flex;gap:8px}.cap-item:before{content:"✓";color:var(--teal);font-weight:800}.optional .cap-item:before{color:#cf8900}
+
+    .compliance{padding-top:0}.compliance-inner{background:linear-gradient(135deg,#effbfd,#f7fbfc);border:1px solid #cfe8ed;border-radius:28px;padding:36px;display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}.compliance h2{font-size:31px}.compliance p{font-size:14px;margin-top:12px}.guardrails{display:grid;gap:10px}.guard{background:#fff;border:1px solid var(--line);border-radius:15px;padding:14px 16px;font-size:13px}.guard b{display:block;margin-bottom:2px}.guard span{color:var(--muted)}
+
+    .cta{padding:84px 0 95px;background:var(--navy);color:#fff}.cta-inner{display:flex;justify-content:space-between;align-items:center;gap:30px}.cta h2{max-width:700px}.cta p{color:#bed0df;margin-top:11px;max-width:610px}.cta-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.cta .btn-ghost{color:#fff;background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.18)}
+    footer{padding:25px 0;color:#7a8d9e;font-size:12px}.footer-inner{display:flex;justify-content:space-between;gap:20px}
+
+    @media (max-width:950px){.hero-grid,.workflow-grid,.visual-grid,.audit-card,.compliance-inner{grid-template-columns:1fr}.challenge-grid{grid-template-columns:1fr 1fr}.step-grid{grid-template-columns:1fr 1fr;gap:40px}.step-grid:before{display:none}.audience-grid{grid-template-columns:1fr}.cap-grid{grid-template-columns:1fr}.cta-inner{display:block}.cta-actions{justify-content:flex-start;margin-top:25px}.flow-card{transform:none}.hero{padding-bottom:65px}.nav{margin-bottom:55px}}
+    @media (max-width:620px){.wrap{width:min(calc(100% - 28px),var(--max))}section{padding:76px 0}.section-head{display:block;margin-bottom:32px}.section-head p{margin-top:13px}.challenge-grid{grid-template-columns:1fr}.step-grid{grid-template-columns:1fr}.flow-line{grid-template-columns:1fr}.arrow{transform:rotate(90deg);height:24px}.node{min-height:90px}.hero-copy .lede{font-size:16px}.hero-actions .btn{width:100%}.trust-row{gap:7px}.cap-list,.audit-points{grid-template-columns:1fr}.compliance-inner{padding:25px}.footer-inner{display:block}.footer-inner span{display:block;margin-top:5px}}
+  </style>
+</head>
+<body>
+  <header class="hero" id="top">
+    <div class="wrap">
+      <nav class="nav"><a class="brand" href="https://finigenie.com">fini<span>genie</span></a><span class="nav-pill">B2B payments • Supplier payouts</span></nav>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">BPSP Supplier Payment Solution</span>
+          <h1>Pay suppliers by card.<br><em>Settle directly to their bank.</em></h1>
+          <p class="lede">Finigenie bridges the gap between corporate cards and suppliers that only accept bank transfers — with payment orchestration, supplier onboarding and reconciliation in one workflow.</p>
+          <div class="hero-actions"><a class="btn btn-primary" href="https://finigenie.com/contact">Talk to Finigenie <span>↗</span></a><a class="btn btn-ghost" href="#how-it-works">See how it works ↓</a></div>
+          <div class="trust-row"><span class="trust">Direct supplier bank settlement</span><span class="trust">Digital KYC / KYB</span><span class="trust">Visa partnership</span></div>
+        </div>
+        <div class="flow-card" aria-label="BPSP payment flow illustration">
+          <div class="flow-head"><div><strong>Payment orchestration</strong><br><small>Card-to-bank account settlement</small></div><div class="live"><i></i>Live flow</div></div>
+          <div class="flow-line">
+            <div class="node"><div class="icon">01</div><strong>Corporate buyer</strong><small>Pay with corporate card</small></div><div class="arrow">→</div>
+            <div class="node highlight"><div class="icon">02</div><strong>Finigenie</strong><small>Capture, map & reconcile</small></div><div class="arrow">→</div>
+            <div class="node"><div class="icon">03</div><strong>Acquiring partner</strong><small>Acquire & settle</small></div><div class="arrow">→</div>
+            <div class="node"><div class="icon">04</div><strong>Supplier</strong><small>Direct bank credit</small></div>
+          </div>
+          <div class="flow-foot"><div class="mini-stat"><b>1 flow</b><span>invoice → payment → proof</span></div><div class="mini-stat"><b>1 view</b><span>status & reconciliation</span></div><div class="mini-stat"><b>0 setup</b><span>for supplier card acceptance</span></div></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="soft" id="challenge">
+      <div class="wrap">
+        <div class="section-head"><div><span class="eyebrow">The problem</span><h2 style="margin-top:14px">Your suppliers don't need to accept cards.</h2></div><p>Corporate cardholders often hit a dead end when contractors, service providers or vendors only accept bank transfers. BPSP turns that limitation into a digital payment workflow.</p></div>
+        <div class="challenge-grid">
+          <article class="problem"><span class="num">01</span><h3>Non-card suppliers</h3><p>Contractors, service providers and vendors only accept bank transfers.</p></article>
+          <article class="problem"><span class="num">02</span><h3>Manual payment work</h3><p>Approvals, manual data entry and spreadsheet reconciliation slow finance teams down.</p></article>
+          <article class="problem"><span class="num">03</span><h3>Underused card capacity</h3><p>Corporate card limits go underutilized, leaving rewards and credit benefits on the table.</p></article>
+          <article class="problem"><span class="num">04</span><h3>Reconciliation headaches</h3><p>Without invoice-to-payment mapping, audit trails become harder to maintain.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="solution" id="how-it-works">
+      <div class="wrap">
+        <div class="section-head"><div><span class="eyebrow">The BPSP model</span><h2 style="margin-top:14px">One payment. Four coordinated steps.</h2></div><p>Finigenie orchestrates the transaction while the acquiring partner handles regulated acquiring and settlement.</p></div>
+        <div class="step-grid">
+          <div class="step"><div class="bubble">01</div><h3>Buyer pays</h3><p>Corporate buyer initiates payment with a card.</p></div>
+          <div class="step"><div class="bubble">02</div><h3>Finigenie maps</h3><p>Payment, supplier and invoice data are orchestrated together.</p></div>
+          <div class="step"><div class="bubble">03</div><h3>Partner settles</h3><p>Acquiring partner processes and settles the transaction.</p></div>
+          <div class="step"><div class="bubble">04</div><h3>Supplier gets paid</h3><p>Supplier receives direct credit to its bank account.</p></div>
+        </div>
+        <div class="audience-grid">
+          <article class="audience"><span class="tag">For banks</span><h3>Unlock card volume</h3><ul><li>Increase corporate card utilization</li><li>Create additional interchange revenue opportunities</li><li>Add a differentiated B2B payment capability</li></ul></article>
+          <article class="audience"><span class="tag">For corporates</span><h3>Pay anyone, centrally</h3><ul><li>Pay suppliers with a corporate card</li><li>Centralize payment control</li><li>Automate reconciliation and proof</li></ul></article>
+          <article class="audience"><span class="tag">For suppliers</span><h3>Get a bank transfer</h3><ul><li>No card acceptance setup required</li><li>Direct bank settlement</li><li>UTR and timestamp proof</li></ul></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap visual-grid">
+        <div class="visual-copy"><span class="eyebrow">One finance workspace</span><h2>See every payment move in real time.</h2><p>The BPSP dashboard gives finance teams a single view of payments, suppliers and transaction status — with quick actions for the workflows they use most.</p>
+          <div class="feature-list">
+            <div class="feature"><span class="check">✓</span><div><b>Money flow analytics</b><span>Visualize send / receive activity across the last 7 days.</span></div></div>
+            <div class="feature"><span class="check">✓</span><div><b>Transaction status</b><span>See successful, failed and pending payments at a glance.</span></div></div>
+            <div class="feature"><span class="check">✓</span><div><b>Supplier insights</b><span>Understand payment concentration and supplier activity.</span></div></div>
+            <div class="feature"><span class="check">✓</span><div><b>Quick actions</b><span>Move from dashboard to Pay, Quick Pay or Cart workflows.</span></div></div>
+          </div>
+        </div>
+        <div class="media-card"><img src="assets/dashboard.png" alt="Finigenie BPSP dashboard showing money flow and transaction status" loading="lazy"><div class="caption">Dashboard concept from the BPSP product deck — refreshed here as a supporting product visual.</div></div>
+      </div>
+    </section>
+
+    <section class="workflow" id="workflow">
+      <div class="wrap">
+        <div class="section-head"><div><span class="eyebrow">Payment workflow</span><h2 style="margin-top:14px">From supplier selection to UTR.</h2></div><p>Single payments and bulk payment workflows can run through the same cart-based checkout experience.</p></div>
+        <div class="workflow-grid">
+          <div class="workflow-steps">
+            <div class="w-step active"><span class="w-num">1</span><div><h3>Select supplier</h3><p>Choose a supplier from the registered list.</p></div></div>
+            <div class="w-step"><span class="w-num">2</span><div><h3>Enter amount + invoice</h3><p>Add the payment amount and upload the invoice.</p></div></div>
+            <div class="w-step"><span class="w-num">3</span><div><h3>Add to cart</h3><p>Batch multiple payments into one checkout flow.</p></div></div>
+            <div class="w-step"><span class="w-num">4</span><div><h3>Checkout with corporate card</h3><p>Complete payment through the card workflow.</p></div></div>
+            <div class="w-step"><span class="w-num">5</span><div><h3>Confirm + track</h3><p>Receive real-time confirmation and UTR details.</p></div></div>
+          </div>
+          <div class="media-card"><img src="assets/payment-workflow.png" alt="Finigenie payment workflow and cart screens" loading="lazy"><div class="caption">Quick Pay + Bulk Upload and Cart + Multiple Payment Options.</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="audit">
+      <div class="wrap audit-card">
+        <div class="audit-copy"><span class="eyebrow">Control & auditability</span><h2>Every payment leaves a trail.</h2><p>Search, inspect, export and share transaction evidence without stitching together spreadsheets and bank confirmations.</p>
+          <div class="audit-points">
+            <div class="audit-point"><b>Search & filters</b><span>Keyword, date range and supplier.</span></div>
+            <div class="audit-point"><b>Live status</b><span>Initiated through settled.</span></div>
+            <div class="audit-point"><b>Receipts & statements</b><span>PDF receipts and CSV statements.</span></div>
+            <div class="audit-point"><b>Audit trail</b><span>Timestamped transaction history.</span></div>
+          </div>
+        </div>
+        <div class="media-card"><img src="assets/transactions.png" alt="Finigenie transaction list and detailed receipt with UTR" loading="lazy"><div class="caption">Transaction list + detailed receipt with UTR from the BPSP product deck.</div></div>
+      </div>
+    </section>
+
+    <section class="capabilities">
+      <div class="wrap">
+        <div class="section-head"><div><span class="eyebrow">Capabilities</span><h2 style="margin-top:14px">Start simple. Extend when you need more control.</h2></div><p>The product deck separates the core BPSP workflow from optional premium modules that can be enabled and scoped as required.</p></div>
+        <div class="cap-grid">
+          <article class="cap-card"><div class="cap-top"><h3>Core platform</h3><p>Everyday supplier payment operations</p></div><div class="cap-list">
+            <span class="cap-item">Web buyer dashboard</span><span class="cap-item">Single & bulk payments</span><span class="cap-item">Digital KYC / KYB</span><span class="cap-item">Supplier management</span><span class="cap-item">Invoice upload</span><span class="cap-item">Cart checkout</span><span class="cap-item">Real-time status</span><span class="cap-item">PDF receipts & CSV statements</span><span class="cap-item">Supplier email notifications</span><span class="cap-item">Search & date filters</span>
+          </div></article>
+          <article class="cap-card optional"><div class="cap-top"><h3>Optional modules</h3><p>Activate for deeper control and integration</p></div><div class="cap-list">
+            <span class="cap-item">Maker-Checker approvals</span><span class="cap-item">Multi-level approval hierarchy</span><span class="cap-item">Supplier Portal</span><span class="cap-item">ERP API integration</span><span class="cap-item">Recurring / scheduled payments</span><span class="cap-item">Bank Admin Dashboard</span><span class="cap-item">Supplier grading & limits</span><span class="cap-item">Custom supplier limits</span><span class="cap-item">Advanced analytics & reporting</span><span class="cap-item">White-label branding</span>
+          </div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="compliance">
+      <div class="wrap compliance-inner">
+        <div><span class="eyebrow">Settlement architecture</span><h2 style="margin-top:14px">Keep the money movement where it belongs.</h2><p>The source architecture positions Finigenie as the technology and orchestration layer, while the acquiring partner handles regulated acquiring and settlement. Supplier funds are routed directly to supplier bank accounts rather than through a merchant collection-and-disbursement loop.</p></div>
+        <div class="guardrails">
+          <div class="guard"><b>Corporate card</b><span>Buyer initiates the payment.</span></div>
+          <div class="guard"><b>Finigenie BPSP</b><span>Card capture, beneficiary mapping, KYC/KYB orchestration and reconciliation.</span></div>
+          <div class="guard"><b>Licensed acquiring partner</b><span>Processor / acquirer layer for regulated payment activity and settlement.</span></div>
+          <div class="guard"><b>Supplier bank account</b><span>Direct bank settlement with payment proof.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="wrap cta-inner"><div><span class="eyebrow" style="color:#76dce9">Ready to modernize supplier payments?</span><h2 style="margin-top:13px">Turn your corporate card into a supplier payment rail.</h2><p>Bring card-funded supplier payments, reconciliation and transaction visibility into one workflow with Finigenie.</p></div><div class="cta-actions"><a class="btn btn-primary" href="https://finigenie.com/contact">Talk to an expert ↗</a><a class="btn btn-ghost" href="https://finigenie.com">Explore Finigenie</a></div></div>
+    </section>
+  </main>
+  <footer><div class="wrap footer-inner"><span>Finigenie • BPSP Supplier Payment Solution</span><span>Product information is illustrative; settlement, partner and regulatory details are subject to applicable agreements and flows.</span></div></footer>
+</body>
+</html>
